@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BaseUnit : MonoBehaviour
 {
+    public enum UnitType
+    {
+        biscuit, shortbread, jamBiscuit, crepe, cake, avatar,
+        blackTea, herbalTea, bubbleTea, milkTea, matcha, failure
+    };
+    UnitType unitType;
+
     enum UnitStats { maxhp, hp, atk, def, movespd, atkspd };
 
     [SerializeField] protected int maxhp, hp, atk, def;
     [SerializeField] protected float movespd, atkspd;
 
-    [SerializeField] protected  float baseAtkCooldown;
+    [SerializeField] protected float baseAtkCooldown;
 
     bool isMoving = false;
 
@@ -61,7 +68,7 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void ExecuteAttack()
     {
-        
+
     }
 
 
@@ -117,5 +124,23 @@ public class BaseUnit : MonoBehaviour
         }
 
         yield return StartCoroutine(nextCoroutine);
+    }
+
+    public virtual void InitializeUnitStats()
+    {
+        maxhp = 1000;
+        atk = 10;
+        def = 10;
+        atkspd = 5;
+        movespd = 5;
+    }
+
+    public virtual void SetUnitStats(int maxhp, int atk, int def, int atkspd, int movespd)
+    {
+        this.maxhp = maxhp;
+        this.atk = atk;
+        this.def = def;
+        this.atkspd = atkspd;
+        this.movespd = movespd;
     }
 }

@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Diagnostics.Tracing;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseUnit : MonoBehaviour
@@ -11,19 +11,18 @@ public class BaseUnit : MonoBehaviour
 
     [SerializeField] protected  float baseAtkCooldown;
 
-    bool isMoving = true;
+    bool isMoving = false;
 
     protected enum UnitState { Moving, Attacking, Dead };
     [SerializeField] protected UnitState unitState;
 
-    private Rigidbody2D rb2d;
-
-    public bool collisionCheck = true;  // TODO: dummy variable, remove this once collision is implemented
+    [SerializeField] protected List<GameObject> objectsInAttackRange = new();
 
 
     void Start()
     {
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        StartCoroutine(ExecuteUnitBehavior());
+        hp = maxhp;
     }
 
 
@@ -31,8 +30,19 @@ public class BaseUnit : MonoBehaviour
     {
         if (isMoving)
         {
-            // TODO: movement via rb2d (scales with movespd)
+            transform.position = new Vector2(transform.position.x + movespd / 4000, transform.position.y);
         }
+    }
+
+
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        objectsInAttackRange.Add(collision.gameObject);
+    }
+
+    public virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        objectsInAttackRange.Remove(collision.gameObject);
     }
 
 
@@ -57,12 +67,12 @@ public class BaseUnit : MonoBehaviour
 
     IEnumerator ExecuteUnitBehavior()
     {
-        Coroutine nextCoroutine;
-        float cooldown = 0;
+        IEnumerator nextCoroutine = null;
+        float cooldown = 0.1f;
 
         if (unitState != UnitState.Dead)
         {
-            if (collisionCheck) // TODO: if Collision check is true (current if condition is a placeholder)
+            if (objectsInAttackRange.Count > 0)
             {
                 unitState = UnitState.Attacking;
             }
@@ -77,16 +87,18 @@ public class BaseUnit : MonoBehaviour
             case UnitState.Moving:
                 // TODO: walk anim here (low priority)
                 isMoving = true;
-                nextCoroutine = StartCoroutine(ExecuteUnitBehavior());
+
+                nextCoroutine = ExecuteUnitBehavior();
                 break;
 
             case UnitState.Attacking:
                 // TODO: attack anim here (low priority)
                 cooldown = baseAtkCooldown / atkspd;
+                isMoving = false;
 
                 ExecuteAttack();
 
-                nextCoroutine = StartCoroutine(ExecuteUnitBehavior());
+                nextCoroutine = ExecuteUnitBehavior();
                 break;
 
             case UnitState.Dead:
@@ -104,6 +116,6 @@ public class BaseUnit : MonoBehaviour
             yield return new WaitForSeconds(cooldown);
         }
 
-        yield return nextCoroutine;
+        yield return StartCoroutine(nextCoroutine);
     }
 }

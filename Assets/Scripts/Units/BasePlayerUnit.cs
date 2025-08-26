@@ -6,7 +6,7 @@ public class BasePlayerUnit : BaseUnit
 {
     public override void ExecuteAttack()
     {
-        GameObject targetGameObject = null;  // TODO: add targeting here according to collision
+        GameObject targetGameObject = objectsInAttackRange[0];
         if (targetGameObject.GetComponent<EnemyTower>())
         {
             Tower target = targetGameObject.GetComponent<EnemyTower>();
@@ -16,6 +16,14 @@ public class BasePlayerUnit : BaseUnit
         {
             BaseEnemyUnit target = targetGameObject.GetComponent<BaseEnemyUnit>();
             target.TakeDamage(atk);
-        }   
+        }
+    }
+    
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.gameObject.GetComponent<PlayerTower>())
+        {
+            objectsInAttackRange.Add(collision.gameObject);
+        }
     }
 }

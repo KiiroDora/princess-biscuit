@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private int hitPoints;
     [SerializeField] private int hitPointsMax = 1000;
+    [SerializeField] private int hitPoints;
 
     enum TowerState { Full, Damaged, VeryDamaged, Destroyed };
     [SerializeField] private TowerState towerState;
@@ -14,7 +14,8 @@ public class Tower : MonoBehaviour
 
     void Start()
     {
-       spriteRenderer = gameObject.GetComponent<SpriteRenderer>(); 
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        hitPoints = hitPointsMax;       
     }
 
 
@@ -23,31 +24,40 @@ public class Tower : MonoBehaviour
         hitPoints = Mathf.Clamp(hitPoints - damageTaken, 0, int.MaxValue);  // clamp the reduced hitpoint to 0 if it goes negative
 
         // set the tower state according to current hp
-        if (hitPoints <= 0 && towerState != TowerState.Destroyed)
+        if (hitPoints <= 0)
         {
-            towerState = TowerState.Destroyed;
-            spriteRenderer.sprite = sprites[3];
+            if (towerState != TowerState.Destroyed)
+            {
+                towerState = TowerState.Destroyed;
+                spriteRenderer.sprite = sprites[3];
+            }
 
-            if (this is PlayerTower)
+            if (this is EnemyTower)
             {
                 Debug.Log("player win");
                 // TODO: add win screen etc.
             }
-            else if (this is EnemyTower)
+            else if (this is PlayerTower)
             {
                 Debug.Log("game over");
                 // TODO: add gameover screen etc.
             }
         }
-        else if (hitPoints <= hitPointsMax / 3 && towerState != TowerState.VeryDamaged)
+        else if (hitPoints <= hitPointsMax / 3)
         {
-            towerState = TowerState.VeryDamaged;
-            spriteRenderer.sprite = sprites[2];
+            if (towerState != TowerState.VeryDamaged)
+            {
+                towerState = TowerState.VeryDamaged;
+                spriteRenderer.sprite = sprites[2];
+            }
         }
-        else if (hitPoints <= hitPointsMax * 2 / 3 && towerState != TowerState.Damaged)
+        else if (hitPoints <= hitPointsMax * 2 / 3)
         {
-            towerState = TowerState.Damaged;
-            spriteRenderer.sprite = sprites[1];
+            if (towerState != TowerState.Damaged)
+            {
+                towerState = TowerState.Damaged;
+                spriteRenderer.sprite = sprites[1];
+            }
         }
         else if (towerState != TowerState.Full)
         {

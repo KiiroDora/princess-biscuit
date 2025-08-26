@@ -47,6 +47,7 @@ public class BaseUnit : MonoBehaviour
         objectsInAttackRange.Add(collision.gameObject);
     }
 
+
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
         objectsInAttackRange.Remove(collision.gameObject);
@@ -126,6 +127,7 @@ public class BaseUnit : MonoBehaviour
         yield return StartCoroutine(nextCoroutine);
     }
 
+
     public virtual void InitializeUnitStats()
     {
         maxhp = 1000;
@@ -134,6 +136,7 @@ public class BaseUnit : MonoBehaviour
         atkspd = 5;
         movespd = 5;
     }
+
 
     public virtual void SetUnitStats(int maxhp, int atk, int def, int atkspd, int movespd)
     {

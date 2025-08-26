@@ -21,7 +21,7 @@ public class BasePlayerUnit : BaseUnit
     
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.gameObject.GetComponent<PlayerTower>())
+        if (!collision.gameObject.GetComponent<PlayerTower>() && !collision.gameObject.GetComponent<BasePlayerUnit>())
         {
             objectsInAttackRange.Add(collision.gameObject);
         }

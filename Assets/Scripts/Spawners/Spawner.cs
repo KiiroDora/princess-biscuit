@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
                 parentTransform = playerParent.transform;
             }
 
-            return Instantiate(unitToSpawn, transform.position, Quaternion.identity, parentTransform);
+            return Instantiate(unitToSpawn, unitToSpawn.transform.position, Quaternion.identity, parentTransform);
         }
         else
         {

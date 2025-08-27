@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] protected BaseUnit biscuit, shortbread, jamBiscuit, crepe, cake, avatar, blackTea, herbalTea, bubbleTea, milkTea, matcha;
+    [SerializeField] protected BaseUnit biscuit, shortbread, jamBiscuit, crepe, avatar, blackTea, herbalTea, bubbleTea, milkTea;
     [SerializeField] private GameObject enemyParent, playerParent;
 
 
@@ -17,7 +17,6 @@ public class Spawner : MonoBehaviour
             BaseUnit.UnitType.shortbread => shortbread,
             BaseUnit.UnitType.jamBiscuit => jamBiscuit,
             BaseUnit.UnitType.crepe => crepe,
-            BaseUnit.UnitType.cake => cake,
             BaseUnit.UnitType.avatar => avatar,
 
             // enemy unit types
@@ -25,7 +24,6 @@ public class Spawner : MonoBehaviour
             BaseUnit.UnitType.herbalTea => herbalTea,
             BaseUnit.UnitType.bubbleTea => bubbleTea,
             BaseUnit.UnitType.milkTea => milkTea,
-            BaseUnit.UnitType.matcha => matcha,
             _ => null
         };
 

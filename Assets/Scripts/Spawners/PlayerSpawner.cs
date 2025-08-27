@@ -136,11 +136,11 @@ public class PlayerSpawner : Spawner
 
         else
         {
-            if (flourAmount == 2 && sugarAmount == 1 && eggAmount == 1 && butterAmount == 1 && milkAmount == 0)  // biscuit
+            if (flourAmount == 1 && sugarAmount == 1 && eggAmount == 1 && butterAmount == 1 && milkAmount == 1)  // biscuit
             {
                 unitTypeToSpawn = BaseUnit.UnitType.biscuit;
             }
-            else if (flourAmount == 1 && sugarAmount == 1 && eggAmount == 1 && butterAmount == 0 && milkAmount == 2)  // crepe 
+            else if (flourAmount == 1 && sugarAmount == 0 && eggAmount == 2 && butterAmount == 0 && milkAmount == 2)  // crepe 
             {
                 unitTypeToSpawn = BaseUnit.UnitType.crepe;
             }
@@ -148,13 +148,9 @@ public class PlayerSpawner : Spawner
             {
                 unitTypeToSpawn = BaseUnit.UnitType.shortbread;
             }
-            else if (flourAmount == 1 && sugarAmount == 2 && eggAmount == 1 && butterAmount == 1 && milkAmount == 0) // jam biscuit
+            else if (flourAmount == 1 && sugarAmount == 1 && eggAmount == 1 && butterAmount == 2 && milkAmount == 0) // jam biscuit
             {
                 unitTypeToSpawn = BaseUnit.UnitType.jamBiscuit;
-            }
-            else if (flourAmount == 1 && sugarAmount == 1 && eggAmount == 1 && butterAmount == 1 && milkAmount == 1) // cake
-            {
-                unitTypeToSpawn = BaseUnit.UnitType.cake;
             }
             else
             {
@@ -163,7 +159,6 @@ public class PlayerSpawner : Spawner
         }
 
         BaseUnit spawnedUnit = SpawnUnit(unitTypeToSpawn);
-        if (unitTypeToSpawn != BaseUnit.UnitType.failure) { spawnedUnit.InitializeUnitStats(); }
 
         // resetting everything
         isSoulAdded = false;

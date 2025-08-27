@@ -6,8 +6,8 @@ public class BaseUnit : MonoBehaviour
 {
     public enum UnitType
     {
-        biscuit, shortbread, jamBiscuit, crepe, cake, avatar,
-        blackTea, herbalTea, bubbleTea, milkTea, matcha, failure
+        biscuit, shortbread, jamBiscuit, crepe, avatar,
+        blackTea, herbalTea, bubbleTea, milkTea, failure
     };
     UnitType unitType;
 
@@ -16,7 +16,7 @@ public class BaseUnit : MonoBehaviour
     [SerializeField] protected int maxhp, hp, atk, def;
     [SerializeField] protected float movespd, atkspd;
 
-    [SerializeField] protected float baseAtkCooldown;
+    protected float baseAtkCooldown = 5;
 
     bool isMoving = false;
 
@@ -125,16 +125,6 @@ public class BaseUnit : MonoBehaviour
         }
 
         yield return StartCoroutine(nextCoroutine);
-    }
-
-
-    public virtual void InitializeUnitStats()
-    {
-        maxhp = 1000;
-        atk = 10;
-        def = 10;
-        atkspd = 5;
-        movespd = 5;
     }
 
 

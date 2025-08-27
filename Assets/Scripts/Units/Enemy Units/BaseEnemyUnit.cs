@@ -6,7 +6,35 @@ public class BaseEnemyUnit : BaseUnit
 
     public override void ExecuteAttack()
     {
-        GameObject targetGameObject = objectsInAttackRange[0];
+        GameObject targetGameObject;
+        GameObject detectedTower = null;
+        GameObject detectedAvatar = null;
+
+        foreach (GameObject gameObject in objectsInAttackRange)
+        {
+            if (gameObject.GetComponent<PlayerTower>())
+            {
+                detectedTower = gameObject;
+            }
+            else if (gameObject.GetComponent<AvatarUnit>())
+            {
+                detectedAvatar = gameObject;
+            }
+        }
+
+        if (detectedTower != null)  // towers are #1 priority
+        {
+            targetGameObject = detectedTower;
+        }
+        else if (detectedAvatar != null)  // avatar is #2 priority
+        {
+            targetGameObject = detectedAvatar;
+        }
+        else
+        {
+            targetGameObject = objectsInAttackRange[0];  // otherwise attack whoever you see first
+        }
+
         if (targetGameObject.GetComponent<PlayerTower>())
         {
             Tower target = targetGameObject.GetComponent<PlayerTower>();

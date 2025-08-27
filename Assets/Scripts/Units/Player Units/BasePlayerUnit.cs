@@ -6,7 +6,16 @@ public class BasePlayerUnit : BaseUnit
 {
     public override void ExecuteAttack()
     {
-        GameObject targetGameObject = objectsInAttackRange[0];
+        GameObject targetGameObject  = objectsInAttackRange[0];
+
+        foreach (GameObject gameObject in objectsInAttackRange)
+        {
+            if (gameObject.GetComponent<EnemyTower>())  //prioritize towers
+            {
+                targetGameObject = gameObject;
+            }
+        }
+
         if (targetGameObject.GetComponent<EnemyTower>())
         {
             Tower target = targetGameObject.GetComponent<EnemyTower>();

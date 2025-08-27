@@ -2526,8 +2526,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.9
-  m_fontSizeBase: 53.9
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -2976,7 +2976,7 @@ MonoBehaviour:
   shortbread: {fileID: 6677893871454041890, guid: d4cec214c1dbc4749af8d0ae48ecc2c8, type: 3}
   jamBiscuit: {fileID: 6377411165815973066, guid: 07a86e9fa8e4df04db3a25d00408a8be, type: 3}
   crepe: {fileID: 2416544367816751151, guid: 473490903e544d14bb15556982b74319, type: 3}
-  avatar: {fileID: 0}
+  avatar: {fileID: 6687426751783512164, guid: 12dfb631793c06e408434f59a7b3fc3c, type: 3}
   blackTea: {fileID: 0}
   herbalTea: {fileID: 0}
   bubbleTea: {fileID: 0}

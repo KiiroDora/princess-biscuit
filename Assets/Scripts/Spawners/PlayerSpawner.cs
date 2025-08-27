@@ -14,6 +14,7 @@ public class PlayerSpawner : Spawner
     public static int ingredientsAdded = 0;
 
     public static bool isSoulAdded = false;
+    private static int soulClickCount = 0;
 
     [SerializeField] private TextMeshProUGUI flourAmountText, sugarAmountText, eggAmountText, butterAmountText, milkAmountText, soulAmountText, bakeText, ingredientText;
     [SerializeField] private Button bakeButton;
@@ -119,9 +120,19 @@ public class PlayerSpawner : Spawner
 
     public void AddSoul()
     {
-        isSoulAdded = true;
-        soulAmountText.text = "x1";
-        soulButton.interactable = false;
+        if (soulClickCount < 1)
+        {
+            soulClickCount++;
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "INFUSE";
+        }
+        else
+        {
+            soulClickCount = 0;
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "GONE.";
+            isSoulAdded = true;
+            soulAmountText.text = "x1";
+            soulButton.interactable = false;
+        }
     }
 
     public void Bake()
@@ -130,7 +141,6 @@ public class PlayerSpawner : Spawner
 
         if (isSoulAdded)
         {
-            // TODO: if soul is added make avatar instead
             unitTypeToSpawn = BaseUnit.UnitType.avatar;
         }
 
@@ -160,13 +170,21 @@ public class PlayerSpawner : Spawner
 
         BaseUnit spawnedUnit = SpawnUnit(unitTypeToSpawn);
 
+        if (spawnedUnit is AvatarUnit avatarUnit)  // determine avatarunit stats
+        {
+            avatarUnit.InitializeStats(maxhp: milkAmount * 100, atk: flourAmount * 10, def: eggAmount * 10, atkspd: sugarAmount * 10, movespd: butterAmount * 10);
+        }
+
         // resetting everything
-        isSoulAdded = false;
-        soulButton.interactable = true;
         bakeButton.interactable = false;
         foreach (Button button in ingredientButtons)
         {
-            button.interactable = true;
+            button.interactable = !isSoulAdded;  // if soul is added disable all buttons
+        }
+        if (soulClickCount == 1)
+        {
+            soulClickCount = 0;
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "SOUL";
         }
         ingredientsAdded = 0;
         flourAmount = 0;
@@ -179,6 +197,7 @@ public class PlayerSpawner : Spawner
         eggAmountText.text = "x" + eggAmount;
         butterAmountText.text = "x" + butterAmount;
         milkAmountText.text = "x" + milkAmount;
+        soulAmountText.text = "x0";
         StartCoroutine(BakingResultTextChange(unitTypeToSpawn));
     }
 

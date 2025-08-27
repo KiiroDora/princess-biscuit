@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private int hitPointsMax = 1000;
-    [SerializeField] private int hitPoints;
+    public int hitPointsMax = 1000;
+    public int hitPoints;
+    [SerializeField] private HitPointBarBehavior hitPointBar;
 
     enum TowerState { Full, Damaged, VeryDamaged, Destroyed };
     [SerializeField] private TowerState towerState;
@@ -22,6 +23,7 @@ public class Tower : MonoBehaviour
     public void TakeDamage(int damageTaken)
     {
         hitPoints = Mathf.Clamp(hitPoints - damageTaken, 0, int.MaxValue);  // clamp the reduced hitpoint to 0 if it goes negative
+        hitPointBar.UpdateHitPointBar(this);
 
         // set the tower state according to current hp
         if (hitPoints <= 0)

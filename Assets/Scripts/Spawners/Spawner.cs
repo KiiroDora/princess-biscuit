@@ -46,7 +46,6 @@ public class Spawner : MonoBehaviour
         else
         {
             return null;
-            // TODO: failure indicator
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,18 +7,26 @@ public class PlayerSpawner : Spawner
 {
     public enum IngredientType { flour, sugar, egg, butter, milk };
 
-    int flourAmount, sugarAmount, eggAmount, butterAmount, milkAmount;
+    public static int flourAmount, sugarAmount, eggAmount, butterAmount, milkAmount;
 
-    int ingredientCount = 10; // TODO: this increases by time OR when enemies are killed 
+    public static int ingredientCount = 10; // this increases by time OR when enemies are killed 
 
-    int ingredientsAdded = 0;
+    public static int ingredientsAdded = 0;
 
-    bool isSoulAdded = false;
+    public static bool isSoulAdded = false;
 
     [SerializeField] private TextMeshProUGUI flourAmountText, sugarAmountText, eggAmountText, butterAmountText, milkAmountText, soulAmountText, bakeText, ingredientText;
     [SerializeField] private Button bakeButton;
     [SerializeField] private Button soulButton;
     [SerializeField] private Button[] ingredientButtons;
+
+    public static PlayerSpawner instance;
+
+
+    void Awake()
+    {
+        instance = this;
+    }
 
 
     void Start()
@@ -43,50 +52,67 @@ public class PlayerSpawner : Spawner
     }
 
 
+    public void IncreaseIngredientCount()
+    {
+        ingredientCount++;
+        ingredientText.text = ingredientText.text = "Ingredients: " + ingredientCount;
+    }
+
+
+    public void IncreaseIngredientCountByAmount(int amount)
+    {
+        ingredientCount += amount;
+        ingredientText.text = ingredientText.text = "Ingredients: " + ingredientCount;
+    }
+
+
     public void AddIngredient(int ingredientType)
     {
-        if (ingredientsAdded < 5)
+        if (ingredientCount > 0)
         {
-            switch ((IngredientType)ingredientType)
+            if (ingredientsAdded < 5)
             {
-                case IngredientType.flour:
-                    flourAmount++;
-                    flourAmountText.text = "x" + flourAmount;
-                    break;
-                case IngredientType.sugar:
-                    sugarAmount++;
-                    sugarAmountText.text = "x" + sugarAmount;
-                    break;
-                case IngredientType.egg:
-                    eggAmount++;
-                    eggAmountText.text = "x" + eggAmount;
-                    break;
-                case IngredientType.butter:
-                    butterAmount++;
-                    butterAmountText.text = "x" + butterAmount;
-                    break;
-                case IngredientType.milk:
-                    milkAmount++;
-                    milkAmountText.text = "x" + milkAmount;
-                    break;
-            }
-
-            ingredientsAdded++;
-            ingredientCount--;
-            ingredientText.text = "Ingredients: " + ingredientCount;
-
-            if (ingredientsAdded >= 5)
-            {
-                foreach (Button button in ingredientButtons)
+                switch ((IngredientType)ingredientType)
                 {
-                    button.interactable = false;
+                    case IngredientType.flour:
+                        flourAmount++;
+                        flourAmountText.text = "x" + flourAmount;
+                        break;
+                    case IngredientType.sugar:
+                        sugarAmount++;
+                        sugarAmountText.text = "x" + sugarAmount;
+                        break;
+                    case IngredientType.egg:
+                        eggAmount++;
+                        eggAmountText.text = "x" + eggAmount;
+                        break;
+                    case IngredientType.butter:
+                        butterAmount++;
+                        butterAmountText.text = "x" + butterAmount;
+                        break;
+                    case IngredientType.milk:
+                        milkAmount++;
+                        milkAmountText.text = "x" + milkAmount;
+                        break;
                 }
-                bakeText.text = "BAKE!";
-                bakeButton.interactable = true;
-            }
-            else
-            {
-                bakeText.text = ingredientsAdded + "/" + 5;
+
+                ingredientsAdded++;
+                ingredientCount--;
+                ingredientText.text = "Ingredients: " + ingredientCount;
+
+                if (ingredientsAdded >= 5)
+                {
+                    foreach (Button button in ingredientButtons)
+                    {
+                        button.interactable = false;
+                    }
+                    bakeText.text = "BAKE!";
+                    bakeButton.interactable = true;
+                }
+                else
+                {
+                    bakeText.text = ingredientsAdded + "/" + 5;
+                }
             }
         }
     }
@@ -158,5 +184,20 @@ public class PlayerSpawner : Spawner
         eggAmountText.text = "x" + eggAmount;
         butterAmountText.text = "x" + butterAmount;
         milkAmountText.text = "x" + milkAmount;
+        StartCoroutine(BakingResultTextChange(unitTypeToSpawn));
+    }
+
+    IEnumerator BakingResultTextChange(BaseUnit.UnitType unitType)
+    {
+        if (unitType != BaseUnit.UnitType.failure)
+        {
+            bakeText.text = "DONE!";
+        }
+        else
+        {
+            bakeText.text = "FAIL";
+        }
+        yield return new WaitForSeconds(0.6f);
+        bakeText.text = ingredientsAdded + "/5";
     }
 }

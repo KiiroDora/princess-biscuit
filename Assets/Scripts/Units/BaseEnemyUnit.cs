@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseEnemyUnit : BaseUnit
 {
+    protected virtual int ingredientLootAmount { get; set; }
+
     public override void ExecuteAttack()
     {
         GameObject targetGameObject = objectsInAttackRange[0];
@@ -27,4 +27,9 @@ public class BaseEnemyUnit : BaseUnit
         }
     }
 
+    protected virtual void OnDestroy()
+    {
+        // inheriting classes must override ingredientLootAmount and override this method to use that field instead
+        PlayerSpawner.instance.IncreaseIngredientCountByAmount(1);
+    }
 }

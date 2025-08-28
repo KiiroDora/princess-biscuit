@@ -9,7 +9,7 @@ public class PlayerSpawner : Spawner
 
     public static int flourAmount, sugarAmount, eggAmount, butterAmount, milkAmount;
 
-    public static int ingredientCount = 10; // this increases by time OR when enemies are killed 
+    public static float ingredientCount = 10; // this increases by time OR when enemies are killed 
 
     public static int ingredientsAdded = 0;
 
@@ -31,7 +31,7 @@ public class PlayerSpawner : Spawner
 
     void Start()
     {
-        ingredientText.text = "Ingredients: " + ingredientCount;
+        ingredientText.text = "Ingredients: " + (int)ingredientCount;
         isSoulAdded = false;
         soulButton.interactable = true;
         bakeButton.interactable = false;
@@ -54,15 +54,15 @@ public class PlayerSpawner : Spawner
 
     public void IncreaseIngredientCount()
     {
-        ingredientCount++;
-        ingredientText.text = ingredientText.text = "Ingredients: " + ingredientCount;
+        ingredientCount += 1 + 0.1f * GameController.EnemiesSlayed;
+        ingredientText.text = ingredientText.text = "Ingredients: " + (int)ingredientCount;
     }
 
 
     public void IncreaseIngredientCountByAmount(int amount)
     {
         ingredientCount += amount;
-        ingredientText.text = ingredientText.text = "Ingredients: " + ingredientCount;
+        ingredientText.text = ingredientText.text = "Ingredients: " + (int)ingredientCount;;
     }
 
 
@@ -98,7 +98,7 @@ public class PlayerSpawner : Spawner
 
                 ingredientsAdded++;
                 ingredientCount--;
-                ingredientText.text = "Ingredients: " + ingredientCount;
+                ingredientText.text = "Ingredients: " + (int)ingredientCount;;
 
                 if (ingredientsAdded >= 5)
                 {

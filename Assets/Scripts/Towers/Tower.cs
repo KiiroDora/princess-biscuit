@@ -36,13 +36,11 @@ public class Tower : MonoBehaviour
 
             if (this is EnemyTower)
             {
-                Debug.Log("player win");
-                // TODO: add win screen etc.
+                GameController.instance.EndGame(isGameWon: true);
             }
             else if (this is PlayerTower)
             {
-                Debug.Log("game over");
-                // TODO: add gameover screen etc.
+                GameController.instance.EndGame(isGameWon: false);
             }
         }
         else if (hitPoints <= hitPointsMax / 3)

@@ -23,6 +23,11 @@ public class EnemySpawner : Spawner
 
     IEnumerator SpawnEnemies()
     {
+        while (GameController.isGamePaused)
+        {
+            yield return null;
+        }
+
         foreach (Wave wave in waves)  // for each wave
         {
             yield return new WaitForSeconds(wave.waveCooldown);  // wait for the interval to end

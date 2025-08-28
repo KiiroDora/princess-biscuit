@@ -37,7 +37,7 @@ public class BaseUnit : MonoBehaviour
     {
         if (isMoving)
         {
-            transform.position = new Vector2(transform.position.x + movespd / 4000, transform.position.y);
+            transform.position = new Vector2(transform.position.x + Time.deltaTime * movespd / 25, transform.position.y);
         }
     }
 
@@ -111,6 +111,7 @@ public class BaseUnit : MonoBehaviour
 
             case UnitState.Dead:
                 nextCoroutine = null;
+                GameController.EnemiesSlayed++;
                 Destroy(gameObject);
                 break;
 

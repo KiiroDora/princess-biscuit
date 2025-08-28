@@ -20,6 +20,8 @@ public class PlayerSpawner : Spawner
     [SerializeField] private Button soulButton;
     [SerializeField] private Button[] ingredientButtons;
 
+    [SerializeField] private Color regularIngredientButtonColor, soulIngredientButtonColor;
+
     public static PlayerSpawner instance;
 
 
@@ -31,7 +33,7 @@ public class PlayerSpawner : Spawner
 
     void Start()
     {
-        ingredientText.text = "Ingredients: " + (int)ingredientCount;
+        ingredientText.text = ((int)ingredientCount).ToString();
         isSoulAdded = false;
         soulButton.interactable = true;
         bakeButton.interactable = false;
@@ -55,14 +57,14 @@ public class PlayerSpawner : Spawner
     public void IncreaseIngredientCount()
     {
         ingredientCount += 1 + 0.1f * GameController.EnemiesSlayed;
-        ingredientText.text = ingredientText.text = "Ingredients: " + (int)ingredientCount;
+        ingredientText.text = ingredientText.text = ((int)ingredientCount).ToString();
     }
 
 
     public void IncreaseIngredientCountByAmount(int amount)
     {
         ingredientCount += amount;
-        ingredientText.text = ingredientText.text = "Ingredients: " + (int)ingredientCount;;
+        ingredientText.text = ingredientText.text = ((int)ingredientCount).ToString();
     }
 
 
@@ -98,7 +100,7 @@ public class PlayerSpawner : Spawner
 
                 ingredientsAdded++;
                 ingredientCount--;
-                ingredientText.text = "Ingredients: " + (int)ingredientCount;;
+                ingredientText.text = ((int)ingredientCount).ToString();
 
                 if (ingredientsAdded >= 5)
                 {
@@ -122,12 +124,19 @@ public class PlayerSpawner : Spawner
     {
         if (isSoulAdded)
         {
-
-            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "SOUL OFF";
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "ADD SOUL";
+            foreach (Button button in ingredientButtons)
+            {
+                button.GetComponent<Image>().color = regularIngredientButtonColor;
+            }
         }
         else
         {
-            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "SOUL ON";
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "REMOVE";
+            foreach (Button button in ingredientButtons)
+            {
+                button.GetComponent<Image>().color = soulIngredientButtonColor;
+            }
         }
 
         isSoulAdded = !isSoulAdded;
@@ -142,6 +151,7 @@ public class PlayerSpawner : Spawner
         {
             unitTypeToSpawn = BaseUnit.UnitType.avatar;
             soulButton.interactable = false;
+            soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "CONJURED";
         }
 
         else
@@ -181,6 +191,10 @@ public class PlayerSpawner : Spawner
         {
             button.interactable = !isSoulAdded;  // if soul is added disable all buttons
         }
+        foreach (Button button in ingredientButtons)
+        {
+            button.GetComponent<Image>().color = regularIngredientButtonColor;
+        }
         ingredientsAdded = 0;
         flourAmount = 0;
         sugarAmount = 0;
@@ -205,7 +219,7 @@ public class PlayerSpawner : Spawner
         {
             bakeText.text = "FAIL";
         }
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1f);
         bakeText.text = ingredientsAdded + "/5";
     }
 }

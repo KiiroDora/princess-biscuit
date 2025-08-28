@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -6,6 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject loseScreen;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private TextMeshProUGUI pauseButtonText;
     public static bool isGamePaused = false;
 
     public static int EnemiesSlayed = 0;
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour
         {
             Time.timeScale = 1;
             pauseScreen.SetActive(false);
+            pauseButtonText.text = "Pause";
             isGamePaused = false;
         }
 
@@ -38,6 +41,7 @@ public class GameController : MonoBehaviour
         {
             Time.timeScale = 0;
             pauseScreen.SetActive(true);
+            pauseButtonText.text = "Unpause";
             isGamePaused = true;
         }
     }
@@ -61,6 +65,12 @@ public class GameController : MonoBehaviour
 
     public void EndGame(bool isGameWon)
     {
+        StartCoroutine(WaitThenEndGame(isGameWon));
+    }
+
+    IEnumerator WaitThenEndGame(bool isGameWon)
+    {
+        yield return new WaitForSecondsRealtime(2f);
         TogglePauseGame();
 
         if (isGameWon)

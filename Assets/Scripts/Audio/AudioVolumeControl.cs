@@ -10,11 +10,17 @@ public class AudioVolumeControl : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(this);
+        if (instance != null && instance != this)  // singleton
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
-    // TODO: find a way to make music play on scene load when changing scenes
 
     void Start()
     {

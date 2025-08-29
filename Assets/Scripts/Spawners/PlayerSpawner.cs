@@ -125,6 +125,7 @@ public class PlayerSpawner : Spawner
         if (isSoulAdded)
         {
             soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "ADD SOUL";
+            AudioPlayer.instance.PlayAudio("Soul Off");
             foreach (Button button in ingredientButtons)
             {
                 button.GetComponent<Image>().color = regularIngredientButtonColor;
@@ -133,6 +134,7 @@ public class PlayerSpawner : Spawner
         else
         {
             soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "REMOVE";
+            AudioPlayer.instance.PlayAudio("Soul On");
             foreach (Button button in ingredientButtons)
             {
                 button.GetComponent<Image>().color = soulIngredientButtonColor;

@@ -33,6 +33,7 @@ public class PlayerSpawner : Spawner
 
     void Start()
     {
+        ingredientCount = 5;
         ingredientText.text = ((int)ingredientCount).ToString();
         isSoulAdded = false;
         soulButton.interactable = true;

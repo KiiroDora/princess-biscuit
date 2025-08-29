@@ -12,6 +12,10 @@ public class MainMenuController : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        if (GameController.isGamePaused)
+        {
+            GameController.instance.TogglePauseGame();
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
 

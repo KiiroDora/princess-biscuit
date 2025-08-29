@@ -25,6 +25,43 @@ public class AudioPlayer : MonoBehaviour
         GameObject.Find(name).GetComponent<AudioSource>().Play();
     }
 
+    public void PlayIngredientAudio(int type)
+    {
+        string name;
+        bool willPlay;
+        switch ((PlayerSpawner.IngredientType)type)
+        {
+            case PlayerSpawner.IngredientType.flour:
+                name = "Flour";
+                willPlay = PlayerSpawner.flourAmount > 0;
+                break;
+            case PlayerSpawner.IngredientType.sugar:
+                name = "Sugar";
+                willPlay = PlayerSpawner.sugarAmount > 0;
+                break;
+            case PlayerSpawner.IngredientType.egg:
+                name = "Egg";
+                willPlay = PlayerSpawner.eggAmount > 0;
+                break;
+            case PlayerSpawner.IngredientType.butter:
+                name = "Butter";
+                willPlay = PlayerSpawner.butterAmount > 0;
+                break;
+            case PlayerSpawner.IngredientType.milk:
+                name = "Milk";
+                willPlay = PlayerSpawner.milkAmount > 0;
+                break;
+            default:
+                name = "Flour";
+                willPlay = PlayerSpawner.flourAmount > 0;
+                break;
+        }
+
+        if (willPlay)
+        {
+            GameObject.Find(name).GetComponent<AudioSource>().Play();
+        }
+    }
 
     public void StopAudio(string name)
     {

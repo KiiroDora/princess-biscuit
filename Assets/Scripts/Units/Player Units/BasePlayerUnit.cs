@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BasePlayerUnit : BaseUnit
@@ -16,15 +14,20 @@ public class BasePlayerUnit : BaseUnit
             }
         }
 
-        if (targetGameObject.GetComponent<EnemyTower>())
+        if (!GameController.isGamePaused)
         {
-            Tower target = targetGameObject.GetComponent<EnemyTower>();
-            target.TakeDamage(atk);
-        }
-        else if (targetGameObject.GetComponent<BaseEnemyUnit>())
-        {
-            BaseEnemyUnit target = targetGameObject.GetComponent<BaseEnemyUnit>();
-            target.TakeDamage(atk);
+            if (targetGameObject.GetComponent<EnemyTower>())
+            {
+                Tower target = targetGameObject.GetComponent<EnemyTower>();
+                AudioPlayer.instance.PlayAudio("Hit");
+                target.TakeDamage(atk);
+            }
+            else if (targetGameObject.GetComponent<BaseEnemyUnit>())
+            {
+                BaseEnemyUnit target = targetGameObject.GetComponent<BaseEnemyUnit>();
+                AudioPlayer.instance.PlayAudio("Hit");
+                target.TakeDamage(atk);
+            }
         }
     }
     

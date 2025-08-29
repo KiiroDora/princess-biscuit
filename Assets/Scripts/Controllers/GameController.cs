@@ -62,6 +62,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void PauseGame()
+    {
+        if (!isGamePaused)
+        {
+            isGamePaused = true;
+            Time.timeScale = 0;
+        }
+    }
+
 
     public void EndGame(bool isGameWon)
     {
@@ -71,15 +80,17 @@ public class GameController : MonoBehaviour
     IEnumerator WaitThenEndGame(bool isGameWon)
     {
         yield return new WaitForSecondsRealtime(2f);
-        TogglePauseGame();
+        PauseGame();
 
-        if (isGameWon)
+        if (isGameWon && !winScreen.activeSelf && !loseScreen.activeSelf)
         {
             winScreen.SetActive(true);
+            AudioPlayer.instance.PlayAudio("Level Clear");
         }
-        else
+        else if (!isGameWon && !winScreen.activeSelf && !loseScreen.activeSelf)
         {
             loseScreen.SetActive(true);
+            AudioPlayer.instance.PlayAudio("Game Over");
         }
     }
 }

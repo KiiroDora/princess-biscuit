@@ -35,15 +35,24 @@ public class BaseEnemyUnit : BaseUnit
             targetGameObject = objectsInAttackRange[0];  // otherwise attack whoever you see first
         }
 
-        if (targetGameObject.GetComponent<PlayerTower>())
+        if (!GameController.isGamePaused)
         {
-            Tower target = targetGameObject.GetComponent<PlayerTower>();
-            target.TakeDamage(atk);
+            if (targetGameObject.GetComponent<PlayerTower>())
+            {
+                Tower target = targetGameObject.GetComponent<PlayerTower>();
+                AudioPlayer.instance.PlayAudio("Hit");
+                target.TakeDamage(atk);
+            }
+            else if (targetGameObject.GetComponent<BasePlayerUnit>())
+            {
+                BasePlayerUnit target = targetGameObject.GetComponent<BasePlayerUnit>();
+                AudioPlayer.instance.PlayAudio("Hit");
+                target.TakeDamage(atk);
+            }
         }
-        else if (targetGameObject.GetComponent<BasePlayerUnit>())
+        else
         {
-            BasePlayerUnit target = targetGameObject.GetComponent<BasePlayerUnit>();
-            target.TakeDamage(atk);
+            StopAllCoroutines();
         }
     }
 

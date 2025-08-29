@@ -63,6 +63,16 @@ public class BaseUnit : MonoBehaviour
         {
             // TODO: death anim here (low priority)
             unitState = UnitState.Dead;
+            GameController.EnemiesSlayed++;
+            Destroy(gameObject);
+            if (this is BaseEnemyUnit)
+            {
+                AudioPlayer.instance.PlayAudio("Break");
+            }
+            else
+            {
+                AudioPlayer.instance.PlayAudio("Crumble");
+            }
         }
     }
 
@@ -111,8 +121,6 @@ public class BaseUnit : MonoBehaviour
 
             case UnitState.Dead:
                 nextCoroutine = null;
-                GameController.EnemiesSlayed++;
-                Destroy(gameObject);
                 break;
 
             default:

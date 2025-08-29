@@ -32,6 +32,8 @@ public class Tower : MonoBehaviour
             {
                 towerState = TowerState.Destroyed;
                 spriteRenderer.sprite = sprites[3];
+                AudioPlayer.instance.StopAllBGM();
+                AudioPlayer.instance.PlayAudio("Destroy");
             }
 
             if (this is EnemyTower)

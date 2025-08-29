@@ -7699,7 +7699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0899e7163917ee49ab98035f815d30c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialBGM: Story
+  initialBGM: Battle
 --- !u!1 &1394178552
 GameObject:
   m_ObjectHideFlags: 0

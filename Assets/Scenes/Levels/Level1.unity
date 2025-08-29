@@ -3186,15 +3186,18 @@ MonoBehaviour:
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   waves:
-  - unitTypes: 05000000
+  - unitTypes: 07000000
     waveCooldown: 2
     spawnCooldown: 2
-  - unitTypes: 0500000005000000
-    waveCooldown: 10
-    spawnCooldown: 5
-  - unitTypes: 050000000500000005000000
+  - unitTypes: 0500000007000000
     waveCooldown: 15
-    spawnCooldown: 3
+    spawnCooldown: 1
+  - unitTypes: 050000000500000007000000
+    waveCooldown: 15
+    spawnCooldown: 5
+  - unitTypes: 070000000700000007000000
+    waveCooldown: 20
+    spawnCooldown: 2
   isEndless: 0
 --- !u!1 &402758908
 GameObject:
@@ -8416,18 +8419,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1363546662}
-        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
-        m_MethodName: PlayAudio
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Conjure
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1567415652

@@ -34,6 +34,7 @@ public class PlayerSpawner : Spawner
     void Start()
     {
         ingredientCount = 5;
+        ingredientsAdded = 0;
         ingredientText.text = ((int)ingredientCount).ToString();
         isSoulAdded = false;
         soulButton.interactable = true;
@@ -80,22 +81,27 @@ public class PlayerSpawner : Spawner
                     case IngredientType.flour:
                         flourAmount++;
                         flourAmountText.text = "x" + flourAmount;
+                        AudioPlayer.instance.PlayAudio("Flour");
                         break;
                     case IngredientType.sugar:
                         sugarAmount++;
                         sugarAmountText.text = "x" + sugarAmount;
+                        AudioPlayer.instance.PlayAudio("Sugar");
                         break;
                     case IngredientType.egg:
                         eggAmount++;
                         eggAmountText.text = "x" + eggAmount;
+                        AudioPlayer.instance.PlayAudio("Egg");
                         break;
                     case IngredientType.butter:
                         butterAmount++;
                         butterAmountText.text = "x" + butterAmount;
+                        AudioPlayer.instance.PlayAudio("Butter");
                         break;
                     case IngredientType.milk:
                         milkAmount++;
                         milkAmountText.text = "x" + milkAmount;
+                        AudioPlayer.instance.PlayAudio("Milk");
                         break;
                 }
 
@@ -155,6 +161,7 @@ public class PlayerSpawner : Spawner
             unitTypeToSpawn = BaseUnit.UnitType.avatar;
             soulButton.interactable = false;
             soulButton.GetComponentInChildren<TextMeshProUGUI>().text = "CONJURED";
+            isSoulAdded = false;
         }
 
         else
@@ -185,14 +192,18 @@ public class PlayerSpawner : Spawner
 
         if (spawnedUnit is AvatarUnit avatarUnit)  // determine avatarunit stats
         {
-            avatarUnit.InitializeStats(maxhp: milkAmount * 100, atk: flourAmount * 10, def: eggAmount * 10, atkspd: sugarAmount * 10, movespd: butterAmount * 10);
+            avatarUnit.InitializeStats(maxhp: milkAmount * 100, atk: flourAmount * 6, def: eggAmount * 6, atkspd: sugarAmount * 6, movespd: butterAmount * 6);
         }
 
         // resetting everything
         bakeButton.interactable = false;
+        // foreach (Button button in ingredientButtons)
+        // {
+        //     button.interactable = !isSoulAdded;  // if soul is added disable all buttons
+        // }
         foreach (Button button in ingredientButtons)
         {
-            button.interactable = !isSoulAdded;  // if soul is added disable all buttons
+            button.interactable = true;  // if soul is added disable all buttons
         }
         foreach (Button button in ingredientButtons)
         {
@@ -217,6 +228,7 @@ public class PlayerSpawner : Spawner
         if (unitType != BaseUnit.UnitType.failure)
         {
             bakeText.text = "DONE!";
+            AudioPlayer.instance.PlayAudio("Conjure");
         }
         else
         {

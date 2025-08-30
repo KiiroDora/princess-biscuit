@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TutorialScript : MonoBehaviour
 {
-    void Awake()
+    void Start()
     {
         GameController.instance.PauseGame();
     }

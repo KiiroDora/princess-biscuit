@@ -16,7 +16,8 @@ public class Tower : MonoBehaviour
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        hitPoints = hitPointsMax;       
+        hitPoints = hitPointsMax;
+        hitPointBar.UpdateHitPointBar(this);     
     }
 
 

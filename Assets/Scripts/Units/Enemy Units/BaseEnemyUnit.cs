@@ -8,7 +8,7 @@ public class BaseEnemyUnit : BaseUnit
     {
         GameObject targetGameObject;
         GameObject detectedTower = null;
-        GameObject detectedAvatar = null;
+        // GameObject detectedAvatar = null;
 
         foreach (GameObject gameObject in objectsInAttackRange)
         {
@@ -16,20 +16,20 @@ public class BaseEnemyUnit : BaseUnit
             {
                 detectedTower = gameObject;
             }
-            else if (gameObject.GetComponent<AvatarUnit>())
-            {
-                detectedAvatar = gameObject;
-            }
+            // else if (gameObject.GetComponent<AvatarUnit>())
+            // {
+            //     detectedAvatar = gameObject;
+            // }
         }
 
         if (detectedTower != null)  // towers are #1 priority
         {
             targetGameObject = detectedTower;
         }
-        else if (detectedAvatar != null)  // avatar is #2 priority
-        {
-            targetGameObject = detectedAvatar;
-        }
+        // else if (detectedAvatar != null)  // avatar is #2 priority
+        // {
+        //     targetGameObject = detectedAvatar;
+        // }
         else
         {
             targetGameObject = objectsInAttackRange[0];  // otherwise attack whoever you see first

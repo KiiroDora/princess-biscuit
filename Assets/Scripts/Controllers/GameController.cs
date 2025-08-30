@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
 
     public static int EnemiesSlayed = 0;
 
+    public static int currentGameSpeed = 1;
+
     public static GameController instance;
 
 
@@ -24,6 +26,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         PlayerSpawner.instance.InvokeRepeating(nameof(PlayerSpawner.instance.IncreaseIngredientCount), 5f, 5f);
+        EnemiesSlayed = 0;
+        currentGameSpeed = 1;
+        Time.timeScale = 1;
     }
 
 
@@ -31,7 +36,7 @@ public class GameController : MonoBehaviour
     {
         if (isGamePaused)
         {
-            Time.timeScale = 1;
+            Time.timeScale = currentGameSpeed;
             pauseScreen.SetActive(false);
             pauseButtonText.text = "Pause";
             isGamePaused = false;
@@ -51,7 +56,7 @@ public class GameController : MonoBehaviour
     {
         if (isGamePaused)
         {
-            Time.timeScale = 1;
+            Time.timeScale = currentGameSpeed;
             isGamePaused = false;
         }
 
@@ -68,6 +73,29 @@ public class GameController : MonoBehaviour
         {
             isGamePaused = true;
             Time.timeScale = 0;
+        }
+    }
+
+
+    public void ToggleSpeedUpGame(TextMeshProUGUI buttonText)
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 2;
+            currentGameSpeed = 2;
+            buttonText.text = ">> x2";
+        }
+        else if (Time.timeScale == 2)
+        {
+            Time.timeScale = 3;
+            currentGameSpeed = 3;
+            buttonText.text = ">> x3";
+        }
+        else if (Time.timeScale == 3)
+        {
+            Time.timeScale = 1;
+            currentGameSpeed = 1;
+            buttonText.text = ">> x1";
         }
     }
 

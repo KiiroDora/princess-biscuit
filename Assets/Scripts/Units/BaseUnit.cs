@@ -7,7 +7,7 @@ public class BaseUnit : MonoBehaviour
     public enum UnitType
     {
         biscuit, shortbread, jamBiscuit, crepe, avatar,
-        blackTea, herbalTea, bubbleTea, milkTea, failure
+        blackTea, herbalTea, bubbleTea, milkTea, bossTea, failure
     };
     UnitType unitType;
 
@@ -134,6 +134,12 @@ public class BaseUnit : MonoBehaviour
         }
 
         yield return StartCoroutine(nextCoroutine);
+    }
+
+
+    public int GetMaxHP()
+    {
+        return maxhp;
     }
 
 

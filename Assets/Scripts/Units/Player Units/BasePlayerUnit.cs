@@ -4,13 +4,32 @@ public class BasePlayerUnit : BaseUnit
 {
     public override void ExecuteAttack()
     {
-        GameObject targetGameObject  = objectsInAttackRange[0];
+        GameObject targetGameObject = objectsInAttackRange[0];
+        GameObject detectedTower = null;
 
         foreach (GameObject gameObject in objectsInAttackRange)
         {
             if (gameObject.GetComponent<EnemyTower>())  //prioritize towers
             {
-                targetGameObject = gameObject;
+                detectedTower = gameObject;
+            }
+        }
+        
+        if (detectedTower != null)  // towers are #1 priority
+        {
+            targetGameObject = detectedTower;
+        }
+
+        else
+        {
+            int largestMaxHP = 0;
+            foreach (GameObject gameObject in objectsInAttackRange)
+            {
+                if (gameObject.GetComponent<BaseUnit>().GetMaxHP() > largestMaxHP)
+                {
+                    targetGameObject = gameObject;
+                    largestMaxHP = targetGameObject.GetComponent<BaseUnit>().GetMaxHP();
+                }
             }
         }
 

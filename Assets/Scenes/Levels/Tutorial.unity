@@ -816,14 +816,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6893304, g: 0.34528297, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff61db0dec51c59469c176a33e243f90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24890d352b998af49a2afdd8fb91988f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2675,8 +2675,8 @@ Transform:
   m_GameObject: {fileID: 260289984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.3, y: -1.2, z: 0}
-  m_LocalScale: {x: 3.8983812, y: 3, z: 1}
+  m_LocalPosition: {x: -7.64, y: -1.2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1339250004}
@@ -5104,6 +5104,7 @@ MonoBehaviour:
   herbalTea: {fileID: 2787411286106471205, guid: 0cf059ed189cbe54ca738a0c9eeba189, type: 3}
   bubbleTea: {fileID: 1023638285039435587, guid: eeffc202ff7c4f442b94437f671239d6, type: 3}
   milkTea: {fileID: 6410176618132382536, guid: e5e0e622f8478df4a806788b7f4fd441, type: 3}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   waves:
@@ -7268,7 +7269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff61db0dec51c59469c176a33e243f90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9797b75ee326ef44a98e04488d9b9be2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10783,14 +10784,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.4660377, b: 0.4660377, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff61db0dec51c59469c176a33e243f90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4c0ca362ce677fd40ab2e1cd82d3b5f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11245,14 +11246,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2471698, g: 0.68410635, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ff61db0dec51c59469c176a33e243f90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75071387989c98c4c9be58e09dfe1907, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14574,6 +14575,7 @@ MonoBehaviour:
   herbalTea: {fileID: 0}
   bubbleTea: {fileID: 0}
   milkTea: {fileID: 0}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   flourAmountText: {fileID: 679306234}

@@ -6,7 +6,7 @@ public class BaseEnemyUnit : BaseUnit
 
     public override void ExecuteAttack()
     {
-        GameObject targetGameObject;
+        GameObject targetGameObject = objectsInAttackRange[0];
         GameObject detectedTower = null;
         // GameObject detectedAvatar = null;
 
@@ -32,7 +32,15 @@ public class BaseEnemyUnit : BaseUnit
         // }
         else
         {
-            targetGameObject = objectsInAttackRange[0];  // otherwise attack whoever you see first
+            int largestMaxHP = 0;  // otherwise attack the player unit with largest maxhp
+            foreach (GameObject gameObject in objectsInAttackRange)
+            {
+                if (gameObject.GetComponent<BaseUnit>().GetMaxHP() > largestMaxHP)
+                {
+                    targetGameObject = gameObject;
+                    largestMaxHP = targetGameObject.GetComponent<BaseUnit>().GetMaxHP();
+                }
+            }
         }
 
         if (!GameController.isGamePaused)

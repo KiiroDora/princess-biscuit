@@ -1722,8 +1722,8 @@ Transform:
   m_GameObject: {fileID: 260289984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.3, y: -1.2, z: 0}
-  m_LocalScale: {x: 3.8983812, y: 3, z: 1}
+  m_LocalPosition: {x: -7.64, y: -1.2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1339250004}
@@ -3183,25 +3183,23 @@ MonoBehaviour:
   herbalTea: {fileID: 2787411286106471205, guid: 0cf059ed189cbe54ca738a0c9eeba189, type: 3}
   bubbleTea: {fileID: 1023638285039435587, guid: eeffc202ff7c4f442b94437f671239d6, type: 3}
   milkTea: {fileID: 6410176618132382536, guid: e5e0e622f8478df4a806788b7f4fd441, type: 3}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   waves:
-  - unitTypes: 060000000800000006000000
-    waveCooldown: 2
-    spawnCooldown: 5
-  - unitTypes: 080000000800000008000000
-    waveCooldown: 15
-    spawnCooldown: 5
-  - unitTypes: 050000000500000005000000
-    waveCooldown: 20
-    spawnCooldown: 2
-  - unitTypes: 08000000060000000700000005000000
-    waveCooldown: 20
+  - unitTypes: 060000000600000008000000
+    waveCooldown: 5
     spawnCooldown: 3
-  - unitTypes: 0800000006000000070000000500000005000000
-    waveCooldown: 25
+  - unitTypes: 05000000050000000800000007000000
+    waveCooldown: 30
     spawnCooldown: 2
-  isEndless: 1
+  - unitTypes: 0800000005000000050000000500000007000000
+    waveCooldown: 40
+    spawnCooldown: 2
+  - unitTypes: 0800000005000000050000000700000007000000
+    waveCooldown: 40
+    spawnCooldown: 2
+  isEndless: 0
 --- !u!1 &402758908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6174,8 +6172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78c28f8bdaf8084f8a005e2ad6ed7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPointsMax: 500
-  hitPoints: 0
+  hitPointsMax: 1000
+  hitPoints: 1000
   hitPointBar: {fileID: 2033341917}
   towerState: 0
   sprites:
@@ -7479,6 +7477,7 @@ MonoBehaviour:
   herbalTea: {fileID: 0}
   bubbleTea: {fileID: 0}
   milkTea: {fileID: 0}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   flourAmountText: {fileID: 679306234}

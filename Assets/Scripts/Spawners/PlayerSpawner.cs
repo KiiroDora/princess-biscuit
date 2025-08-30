@@ -58,7 +58,7 @@ public class PlayerSpawner : Spawner
 
     public void IncreaseIngredientCount()
     {
-        ingredientCount += 1 + 0.1f * GameController.EnemiesSlayed;
+        ingredientCount += 1 + Mathf.Clamp(0.1f * GameController.EnemiesSlayed, 0, 1);
         ingredientText.text = ingredientText.text = ((int)ingredientCount).ToString();
     }
 

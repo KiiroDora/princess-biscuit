@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3df631e4f0065c458feb147969ae348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhp: 200
-  hp: 200
+  maxhp: 150
+  hp: 150
   atk: 5
   def: 5
   movespd: -10

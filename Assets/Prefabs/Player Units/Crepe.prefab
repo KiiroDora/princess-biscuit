@@ -105,7 +105,7 @@ MonoBehaviour:
   atk: 5
   def: 10
   movespd: 5
-  atkspd: 1
+  atkspd: 2
   unitState: 0
   objectsInAttackRange: []
 --- !u!70 &7621445478998656723

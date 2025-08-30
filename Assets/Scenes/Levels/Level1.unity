@@ -1722,8 +1722,8 @@ Transform:
   m_GameObject: {fileID: 260289984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.3, y: -1.2, z: 0}
-  m_LocalScale: {x: 3.8983812, y: 3, z: 1}
+  m_LocalPosition: {x: -7.64, y: -1.2, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1339250004}
@@ -3183,6 +3183,7 @@ MonoBehaviour:
   herbalTea: {fileID: 2787411286106471205, guid: 0cf059ed189cbe54ca738a0c9eeba189, type: 3}
   bubbleTea: {fileID: 1023638285039435587, guid: eeffc202ff7c4f442b94437f671239d6, type: 3}
   milkTea: {fileID: 6410176618132382536, guid: e5e0e622f8478df4a806788b7f4fd441, type: 3}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   waves:
@@ -7476,6 +7477,7 @@ MonoBehaviour:
   herbalTea: {fileID: 0}
   bubbleTea: {fileID: 0}
   milkTea: {fileID: 0}
+  bossTea: {fileID: 0}
   enemyParent: {fileID: 402758908}
   playerParent: {fileID: 455847719}
   flourAmountText: {fileID: 679306234}

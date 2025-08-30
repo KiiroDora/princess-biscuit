@@ -1,0 +1,154 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseUnit : MonoBehaviour
+{
+    public enum UnitType
+    {
+        biscuit, shortbread, jamBiscuit, crepe, avatar,
+        blackTea, herbalTea, bubbleTea, milkTea, bossTea, failure
+    };
+    UnitType unitType;
+
+    enum UnitStats { maxhp, hp, atk, def, movespd, atkspd };
+
+    [SerializeField] protected int maxhp, hp, atk, def;
+    [SerializeField] protected float movespd, atkspd;
+
+    protected float baseAtkCooldown = 5;
+
+    bool isMoving = false;
+
+    protected enum UnitState { Moving, Attacking, Dead };
+    [SerializeField] protected UnitState unitState;
+
+    [SerializeField] protected List<GameObject> objectsInAttackRange = new();
+
+
+    void Start()
+    {
+        StartCoroutine(ExecuteUnitBehavior());
+        hp = maxhp;
+    }
+
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            transform.position = new Vector2(transform.position.x + Time.deltaTime * movespd / 25, transform.position.y);
+        }
+    }
+
+
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        objectsInAttackRange.Add(collision.gameObject);
+    }
+
+
+    public virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        objectsInAttackRange.Remove(collision.gameObject);
+    }
+
+
+    public void TakeDamage(int enemyAtk)
+    {
+        int damageTaken = Mathf.Clamp((int)((float)enemyAtk * 100 / (def + 100)), 1, int.MaxValue);  // damage calculation
+        hp = Mathf.Clamp(hp - damageTaken, 0, int.MaxValue);
+
+        if (hp <= 0)
+        {
+            // TODO: death anim here (low priority)
+            unitState = UnitState.Dead;
+            GameController.EnemiesSlayed++;
+            Destroy(gameObject);
+            if (this is BaseEnemyUnit)
+            {
+                AudioPlayer.instance.PlayAudio("Break");
+            }
+            else
+            {
+                AudioPlayer.instance.PlayAudio("Crumble");
+            }
+        }
+    }
+
+
+    public virtual void ExecuteAttack()
+    {
+
+    }
+
+
+    IEnumerator ExecuteUnitBehavior()
+    {
+        IEnumerator nextCoroutine = null;
+        float cooldown = 0.1f;
+
+        if (unitState != UnitState.Dead)
+        {
+            if (objectsInAttackRange.Count > 0)
+            {
+                unitState = UnitState.Attacking;
+            }
+            else
+            {
+                unitState = UnitState.Moving;
+            }
+        }
+
+        switch (unitState)
+        {
+            case UnitState.Moving:
+                // TODO: walk anim here (low priority)
+                isMoving = true;
+
+                nextCoroutine = ExecuteUnitBehavior();
+                break;
+
+            case UnitState.Attacking:
+                // TODO: attack anim here (low priority)
+                cooldown = baseAtkCooldown / atkspd;
+                isMoving = false;
+
+                ExecuteAttack();
+
+                nextCoroutine = ExecuteUnitBehavior();
+                break;
+
+            case UnitState.Dead:
+                nextCoroutine = null;
+                break;
+
+            default:
+                nextCoroutine = null;
+                break;
+        }
+
+        if (cooldown > 0)
+        {
+            yield return new WaitForSeconds(cooldown);
+        }
+
+        yield return StartCoroutine(nextCoroutine);
+    }
+
+
+    public int GetMaxHP()
+    {
+        return maxhp;
+    }
+
+
+    public virtual void SetUnitStats(int maxhp, int atk, int def, int atkspd, int movespd)
+    {
+        this.maxhp = maxhp;
+        this.atk = atk;
+        this.def = def;
+        this.atkspd = atkspd;
+        this.movespd = movespd;
+    }
+}
